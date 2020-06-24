@@ -3,7 +3,7 @@
 ### Installation
 
 ```
-> helm plugin install https://cicd.onesaitplatform.com/gitlab/onesait-platform/helm-certgen
+> helm plugin install https://cicd.onesaitplatform.com/gitlab/onesait-platform/helm-certgen.git
 ```
 
 ### Usage
