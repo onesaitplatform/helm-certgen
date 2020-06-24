@@ -1,0 +1,7 @@
+name: "certgen"
+version: "1.0"
+usage: "Self signed certificates generation"
+description: |-
+  This plugin generates self signed certificate for route (Openshift) and in form of secret for Ingress (k8s)
+ignoreFlags: false  
+command: "$HELM_PLUGIN_DIR/create-certs-fullchain.sh"
