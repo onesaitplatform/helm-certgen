@@ -38,3 +38,6 @@ openssl x509 -in ssl/server.crt -text -noout
 #============================================================
 openssl verify -CAfile ssl/ca.crt ssl/intermediate.crt
 openssl verify -verbose -CAfile <(cat ssl/intermediate.crt ssl/ca.crt) ssl/server.crt
+
+cat ssl/intermediate.key | base64
+cat ssl/fullchain.crt | base64
