@@ -5,6 +5,10 @@ source config.properties
 
 mkdir $(pwd)/ssl
 
+echo "------------------- Parameters -------------------"
+echo $*
+echo "------------------- Parameters -------------------"
+
 # Generate and self-sign the Root CA
 #===========================================================
 openssl genrsa -out ssl/ca.key 2048
