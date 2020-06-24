@@ -18,12 +18,12 @@ openssl req -new -x509 -days 3650 -key ssl/ca.key -subj "/C=${C}/ST=${ST}/L=${L}
 # Generate and sign the intermediate CA
 #============================================================
 openssl req -newkey rsa:2048 -nodes -keyout ssl/intermediate.key -subj "/C=${C}/ST=${ST}/L=${L}/O=${O}/CN=${CN2}" -out ssl/intermediate.csr
-openssl x509 -req -extfile <(printf "subjectAltName=${DNS}")  -in ssl/intermediate.csr -CA ssl/ca.crt -CAkey ssl/ca.key -CAcreateserial -out ssl/intermediate.crt -days 2000 -sha256
+openssl x509 -req -extfile <(printf "subjectAltName=${DNS}$1")  -in ssl/intermediate.csr -CA ssl/ca.crt -CAkey ssl/ca.key -CAcreateserial -out ssl/intermediate.crt -days 2000 -sha256
 
 # Generate a certificate and sign with the intermediate CA
 #============================================================
-openssl req -newkey rsa:2048 -nodes -keyout ssl/server.key -subj "/C=${C}/ST=${ST}/L=${L}/O=${O}/CN=${DNS}" -out ssl/server.csr
-openssl x509 -req -extfile <(printf "subjectAltName=${DNS}") -days 730 -in ssl/server.csr -CA ssl/intermediate.crt -CAkey ssl/intermediate.key -CAcreateserial -out ssl/server.crt
+openssl req -newkey rsa:2048 -nodes -keyout ssl/server.key -subj "/C=${C}/ST=${ST}/L=${L}/O=${O}/CN=${DNS}$1" -out ssl/server.csr
+openssl x509 -req -extfile <(printf "subjectAltName=${DNS}$1") -days 730 -in ssl/server.csr -CA ssl/intermediate.crt -CAkey ssl/intermediate.key -CAcreateserial -out ssl/server.crt
 
 # Generate a certificate chain
 #===========================================================
