@@ -20,7 +20,7 @@
 
 ### Usage
 
-- If Only you want to create self signed certificates
+- If you only want to create self signed certificates
 
 ```
 > helm certgen
