@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# if an error occurs the script stops inmediately
+set -e
+
 # Load configuration file
 source config.properties
 
@@ -8,6 +11,8 @@ mkdir $(pwd)/ssl
 echo "------------------- Parameters -------------------"
 echo $*
 echo "------------------- Parameters -------------------"
+
+params=("$@")
 
 # Generate and self-sign the Root CA
 #===========================================================
@@ -42,8 +47,10 @@ openssl verify -verbose -CAfile <(cat ssl/intermediate.crt ssl/ca.crt) ssl/serve
 key=$(cat ssl/intermediate.key | base64)
 cert=$(cat ssl/fullchain.crt | base64)
 
-# if [ deploy_route == 'true' ]
-echo "$(date) Route manifest deletion if exists..."
+# if [ ${#params[@]} == '--route-deploy' ]
+echo "[INFO] Route manifest deletion if exists..."
+echo $HELM_KUBECONTEXT
+
 rm route-template/*.yml
 echo "apiVersion: v1" >> route-template/route.yml
 echo "kind: Route" >> route-template/route.yml
@@ -60,3 +67,5 @@ echo "    key: |" >> route-template/route.yml
 echo "$key" >> route-template/route.yml
 echo "    certificate: |" >> route-template/route.yml
 echo "$cert" >> route-template/route.yml
+
+exit 0
