@@ -20,8 +20,6 @@
 
 ### Plugin usage
 
-- If you only want to create self signed certificates and OCP Route manifest
-
 ```
 > helm certgen --domain *.example.com --host onesaitplatform.example.com
 ```
