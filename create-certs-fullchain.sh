@@ -4,7 +4,7 @@
 set -e
 
 # Load configuration file
-source config.properties
+source $(pwd)/config.properties
 
 mkdir $(pwd)/ssl
 
