@@ -39,5 +39,24 @@ openssl x509 -in ssl/server.crt -text -noout
 openssl verify -CAfile ssl/ca.crt ssl/intermediate.crt
 openssl verify -verbose -CAfile <(cat ssl/intermediate.crt ssl/ca.crt) ssl/server.crt
 
-cat ssl/intermediate.key | base64
-cat ssl/fullchain.crt | base64
+key=$(cat ssl/intermediate.key | base64)
+cert=$(cat ssl/fullchain.crt | base64)
+
+# if [ deploy_route == 'true' ]
+echo "$(date) Route manifest deletion if exists..."
+rm route-template/*.yml
+echo "apiVersion: v1" >> route-template/route.yml
+echo "kind: Route" >> route-template/route.yml
+echo "metadata:" >> route-template/route.yml
+echo "  name: frontend" >> route-template/route.yml
+echo "spec:" >> route-template/route.yml
+echo "  host: www.example.com" >> route-template/route.yml
+echo "  to:" >> route-template/route.yml
+echo "    kind: Service" >> route-template/route.yml
+echo "    name: loadbalancer" >> route-template/route.yml
+echo "  tls:" >> route-template/route.yml
+echo "    termination: edge" >> route-template/route.yml
+echo "    key: |" >> route-template/route.yml
+echo "$key" >> route-template/route.yml
+echo "    certificate: |" >> route-template/route.yml
+echo "$cert" >> route-template/route.yml

@@ -1,0 +1,6 @@
+name: certgen
+commands:
+- name: certgen
+  flags:
+  - route-deploy
+  - host
