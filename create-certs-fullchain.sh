@@ -13,17 +13,17 @@ help() {
 parseParams() {
 
   if [[ ${#params[@]} -lt 4 ]]; then
-    help()
+    help
     exit 1
   fi
 
   if [[ ${#params[1]} != '--domain' ]]; then
-    help()
+    help
     exit 1
   fi
 
   if [[ ${#params[3]} != '--host' ]]; then
-    help()
+    help
     exit 1
   fi
 
