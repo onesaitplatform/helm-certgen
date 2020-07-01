@@ -47,11 +47,8 @@ openssl verify -verbose -CAfile <(cat ssl/intermediate.crt ssl/ca.crt) ssl/serve
 key=$(cat ssl/intermediate.key | base64)
 cert=$(cat ssl/fullchain.crt | base64)
 
-# if [ ${#params[@]} == '--route-deploy' ]
-echo "[INFO] Route manifest deletion if exists..."
-echo $HELM_PLUGIN_DIR
+mkdir route-template
 
-rm route-template/*.yml
 echo "apiVersion: v1" >> route-template/route.yml
 echo "kind: Route" >> route-template/route.yml
 echo "metadata:" >> route-template/route.yml
