@@ -3,17 +3,27 @@
 # if an error occurs the script stops inmediately
 set -e
 
+help() {
+  echo "Plugin usage:"
+  echo
+  echo "helm certgen --domain *.example.com --host onesaitplatform.example.com"
+  echo
+}
+
 parseParams() {
 
   if [[ ${#params[@]} -lt 4 ]]; then
+    help()
     exit 1
   fi
 
   if [[ ${#params[1]} != '--domain' ]]; then
+    help()
     exit 1
   fi
 
   if [[ ${#params[3]} != '--host' ]]; then
+    help()
     exit 1
   fi
 
