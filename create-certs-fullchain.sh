@@ -49,7 +49,7 @@ cert=$(cat ssl/fullchain.crt | base64)
 
 # if [ ${#params[@]} == '--route-deploy' ]
 echo "[INFO] Route manifest deletion if exists..."
-echo $HELM_KUBECONTEXT
+echo $HELM_PLUGIN_DIR
 
 rm route-template/*.yml
 echo "apiVersion: v1" >> route-template/route.yml

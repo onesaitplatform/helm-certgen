@@ -13,6 +13,9 @@ description: |-
 
   or simply
 
-  > helm certgen               
+  > helm certgen
 ignoreFlags: false
 command: "$HELM_PLUGIN_DIR/create-certs-fullchain.sh"
+hooks:
+  install: "cd $HELM_PLUGIN_DIR; scripts/install_plugin.sh"
+  update: "cd $HELM_PLUGIN_DIR; scripts/install_plugin.sh"
