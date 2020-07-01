@@ -4,7 +4,7 @@
 set -e
 
 # Load configuration file
-source $(pwd)/config.properties
+source $HELM_PLUGIN_DIR/config.properties
 
 mkdir $(pwd)/ssl
 
