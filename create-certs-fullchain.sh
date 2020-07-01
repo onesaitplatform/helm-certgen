@@ -5,7 +5,7 @@ set -e
 
 parseParams() {
 
-  if [ ${#params[@]} -lt 4]; then
+  if [[ ${#params[@]} -lt 4 ]]; then
     exit 1
   fi
 
