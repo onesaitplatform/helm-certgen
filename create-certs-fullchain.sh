@@ -3,16 +3,36 @@
 # if an error occurs the script stops inmediately
 set -e
 
+parseParams() {
+
+  if [ ${#params[@]} -lt 4]; then
+    exit 1
+  fi
+
+  if [[ ${#params[1]} != '--domain' ]]; then
+    exit 1
+  fi
+
+  if [[ ${#params[3]} != '--host' ]]; then
+    exit 1
+  fi
+
+  domain=${#params[2]}
+  host=${#params[4]}
+
+  echo $domain
+  echo $host
+
+}
+
 # Load configuration file
 source $HELM_PLUGIN_DIR/config.properties
 
 mkdir $(pwd)/ssl
 
-echo "------------------- Parameters -------------------"
-echo $*
-echo "------------------- Parameters -------------------"
-
 params=("$@")
+
+parseParams
 
 # Generate and self-sign the Root CA
 #===========================================================
@@ -23,12 +43,12 @@ openssl req -new -x509 -days 3650 -key ssl/ca.key -subj "/C=${C}/ST=${ST}/L=${L}
 # Generate and sign the intermediate CA
 #============================================================
 openssl req -newkey rsa:2048 -nodes -keyout ssl/intermediate.key -subj "/C=${C}/ST=${ST}/L=${L}/O=${O}/CN=${CN2}" -out ssl/intermediate.csr
-openssl x509 -req -extfile <(printf "subjectAltName=${DNS}$1")  -in ssl/intermediate.csr -CA ssl/ca.crt -CAkey ssl/ca.key -CAcreateserial -out ssl/intermediate.crt -days 2000 -sha256
+openssl x509 -req -extfile <(printf "subjectAltName=${DNS}${#params[2]}")  -in ssl/intermediate.csr -CA ssl/ca.crt -CAkey ssl/ca.key -CAcreateserial -out ssl/intermediate.crt -days 2000 -sha256
 
 # Generate a certificate and sign with the intermediate CA
 #============================================================
-openssl req -newkey rsa:2048 -nodes -keyout ssl/server.key -subj "/C=${C}/ST=${ST}/L=${L}/O=${O}/CN=${DNS}$1" -out ssl/server.csr
-openssl x509 -req -extfile <(printf "subjectAltName=${DNS}$1") -days 730 -in ssl/server.csr -CA ssl/intermediate.crt -CAkey ssl/intermediate.key -CAcreateserial -out ssl/server.crt
+openssl req -newkey rsa:2048 -nodes -keyout ssl/server.key -subj "/C=${C}/ST=${ST}/L=${L}/O=${O}/CN=${DNS}${#params[2]}" -out ssl/server.csr
+openssl x509 -req -extfile <(printf "subjectAltName=${DNS}${#params[2]}") -days 730 -in ssl/server.csr -CA ssl/intermediate.crt -CAkey ssl/intermediate.key -CAcreateserial -out ssl/server.crt
 
 # Generate a certificate chain
 #===========================================================
@@ -47,7 +67,7 @@ openssl verify -verbose -CAfile <(cat ssl/intermediate.crt ssl/ca.crt) ssl/serve
 key=$(cat ssl/intermediate.key | base64)
 cert=$(cat ssl/fullchain.crt | base64)
 
-mkdir route-template
+mkdir $(pwd)/route-template
 
 echo "apiVersion: v1" >> route-template/route.yml
 echo "kind: Route" >> route-template/route.yml

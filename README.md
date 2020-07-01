@@ -20,26 +20,8 @@
 
 ### Plugin usage
 
-- If you only want to create self signed certificates
+- If you only want to create self signed certificates and OCP Route manifest
 
 ```
-> helm certgen *.example.com
-```
-
-- Or generate cert at the same time you install Chart on k8s cluster
-
-```
-> helm certgen *.example.com install onesaitplatform/onesait-platform-chart \
-               --namespace onesait-platform \
-               --generate-name \
-               --version 2
-```
-
-- Also you can deploy Route on Openshift
-
-```
-> helm certgen *.example.com --route-deploy install onesaitplatform/onesait-platform-chart \
-               --namespace onesait-platform \
-               --generate-name \
-               --version 2
+> helm certgen --domain *.example.com --host onesaitplatform.example.com
 ```

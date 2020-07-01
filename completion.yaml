@@ -1,4 +1,4 @@
 name: certgen
 flags:
-- route-deploy
+- domain
 - host
