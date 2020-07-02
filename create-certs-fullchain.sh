@@ -14,7 +14,7 @@ help() {
 parseParams() {
 
   if [[ ${#params[@]} -lt 4 ]]; then
-    echo "Bad numbers of params!"
+    echo "Bad number of params!"
     help
     exit 1
   fi
@@ -93,7 +93,7 @@ fi
 echo "apiVersion: v1" >> route-template/route.yml
 echo "kind: Route" >> route-template/route.yml
 echo "metadata:" >> route-template/route.yml
-echo "  name: frontend" >> route-template/route.yml
+echo "  name: loadbalancer-route" >> route-template/route.yml
 echo "spec:" >> route-template/route.yml
 echo "  host: $host" >> route-template/route.yml
 echo "  to:" >> route-template/route.yml
