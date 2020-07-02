@@ -81,8 +81,8 @@ openssl x509 -in ssl/server.crt -text -noout
 openssl verify -CAfile ssl/ca.crt ssl/intermediate.crt
 openssl verify -verbose -CAfile <(cat ssl/intermediate.crt ssl/ca.crt) ssl/server.crt
 
-key=$(cat ssl/intermediate.key | base64)
-cert=$(cat ssl/fullchain.crt | base64)
+key=$(cat ssl/intermediate.key)
+cert=$(cat ssl/fullchain.crt)
 
 if [[ ! -d  $(pwd)/route-template ]]; then
   mkdir $(pwd)/route-template
