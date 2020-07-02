@@ -1,12 +1,14 @@
 apiVersion: v1
 kind: Route
 metadata:
-  name: load
+  name: frontend
 spec:
   host: onesaitplatform.example.com
   to:
     kind: Service
     name: loadbalancer
+  port:
+    targetPort: http    
   tls:
     termination: edge
     key: |

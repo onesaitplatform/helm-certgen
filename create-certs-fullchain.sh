@@ -96,9 +96,12 @@ echo "metadata:" >> route-template/route.yml
 echo "  name: loadbalancer-route" >> route-template/route.yml
 echo "spec:" >> route-template/route.yml
 echo "  host: $host" >> route-template/route.yml
+echo "  path: /" >> route-template/route.yml
 echo "  to:" >> route-template/route.yml
 echo "    kind: Service" >> route-template/route.yml
 echo "    name: loadbalancer" >> route-template/route.yml
+echo "  port:" >> route-template/route.yml
+echo "    targetPort: http" >> route-template/route.yml
 echo "  tls:" >> route-template/route.yml
 echo "    termination: edge" >> route-template/route.yml
 echo "    key: |" >> route-template/route.yml
