@@ -90,7 +90,7 @@ else
   rm $(pwd)/route-template/*.yml
 fi
 
-echo "apiVersion: v1" >> route-template/route.yml
+echo "apiVersion: route.openshift.io/v1" >> route-template/route.yml
 echo "kind: Route" >> route-template/route.yml
 echo "metadata:" >> route-template/route.yml
 echo "  name: loadbalancer-route" >> route-template/route.yml
