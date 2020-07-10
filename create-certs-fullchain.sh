@@ -125,8 +125,8 @@ echo "    targetPort: http" >> route-template/route.yml
 echo "  tls:" >> route-template/route.yml
 echo "    termination: edge" >> route-template/route.yml
 echo "    key: |" >> route-template/route.yml
-echo "      $key" >> route-template/route.yml
+echo "$key" >> route-template/route.yml
 echo "    certificate: |" >> route-template/route.yml
-echo "      $cert" >> route-template/route.yml
+echo "$cert" >> route-template/route.yml
 
 exit 0
