@@ -90,6 +90,13 @@ else
   rm $(pwd)/route-template/*.yml
 fi
 
+# Read every line and append it with a new tab character at the begining to a new file
+input=$(pwd)/fullchain.crt
+while IFS= read -r line
+do
+  echo "      " + "$line"
+done < "$input"
+
 echo "apiVersion: route.openshift.io/v1" >> route-template/route.yml
 echo "kind: Route" >> route-template/route.yml
 echo "metadata:" >> route-template/route.yml
