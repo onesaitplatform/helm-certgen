@@ -82,7 +82,6 @@ openssl verify -CAfile ssl/ca.crt ssl/intermediate.crt
 openssl verify -verbose -CAfile <(cat ssl/intermediate.crt ssl/ca.crt) ssl/server.crt
 
 key=$(cat ssl/intermediate.key)
-cert=$(cat ssl/fullchain.crt)
 
 if [[ ! -d  $(pwd)/route-template ]]; then
   mkdir $(pwd)/route-template
@@ -94,8 +93,10 @@ fi
 input=$(pwd)/ssl/fullchain.crt
 while IFS= read -r line
 do
-  echo "      " + "$line"
+  echo "      $line" >> tabulatecert.crt
 done < "$input"
+
+cert=$(cat ssl/tabulatecert.crt)
 
 echo "apiVersion: route.openshift.io/v1" >> route-template/route.yml
 echo "kind: Route" >> route-template/route.yml
