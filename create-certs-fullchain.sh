@@ -129,4 +129,7 @@ echo "$key" >> route-template/route.yml
 echo "    certificate: |" >> route-template/route.yml
 echo "$cert" >> route-template/route.yml
 
+# Deploys route to the Openshift cluster
+oc apply route-template/route.yml
+
 exit 0
