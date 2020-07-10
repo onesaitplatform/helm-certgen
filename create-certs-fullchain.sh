@@ -81,16 +81,17 @@ openssl x509 -in ssl/server.crt -text -noout
 openssl verify -CAfile ssl/ca.crt ssl/intermediate.crt
 openssl verify -verbose -CAfile <(cat ssl/intermediate.crt ssl/ca.crt) ssl/server.crt
 
-key=$(cat ssl/intermediate.key)
-
 if [[ ! -d  $(pwd)/route-template ]]; then
   mkdir $(pwd)/route-template
 else
   rm $(pwd)/route-template/*.yml
 fi
 
-# Create empty file if not exists
+# Create empty cert file if not exists
 touch $(pwd)/ssl/tabulatecert.crt
+
+# Create empty key file if not exists
+touch $(pwd)/ssl/tabulatekey.key
 
 # Read every line and append it with a new tab character at the begining to a new file
 input=$(pwd)/ssl/fullchain.crt
@@ -99,6 +100,14 @@ do
   echo "      $line" >> $(pwd)/ssl/tabulatecert.crt
 done < "$input"
 
+# Read every line and append it with a new tab character at the begining to a new file
+input=$(pwd)/ssl/intermediate.key
+while IFS= read -r line
+do
+  echo "      $line" >> $(pwd)/ssl/tabulatekey.key
+done < "$input"
+
+key=$(cat ssl/tabulatekey.key)
 cert=$(cat ssl/tabulatecert.crt)
 
 echo "apiVersion: route.openshift.io/v1" >> route-template/route.yml
