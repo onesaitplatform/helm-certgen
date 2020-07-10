@@ -91,7 +91,7 @@ else
 fi
 
 # Read every line and append it with a new tab character at the begining to a new file
-input=$(pwd)/fullchain.crt
+input=$(pwd)/ssl/fullchain.crt
 while IFS= read -r line
 do
   echo "      " + "$line"
