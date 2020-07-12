@@ -30,3 +30,8 @@ This plugin allows to generate self signed certificates, additionally generates 
 ```
 > helm certgen --domain *.example.com --host onesaitplatform.example.com
 ```
+
+Once the plugin execution is finished, it generates in the same directory two folders:
+
+- ssl: it includes all the files necessary to generate self signed certificates (CA, server certificate, private key...)
+- route-template: it includes **Route.yml** Openshift manifest file that had been deployed to an existing cluster
