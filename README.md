@@ -11,7 +11,7 @@ Requirements:
 ### Plugin installation
 
 ```
-> helm plugin install https://cicd.onesaitplatform.com/gitlab/onesait-platform/helm-certgen.git
+> helm plugin install https://github.com/onesaitplatform/helm-certgen.git
 ```
 
 ### Uninstall
