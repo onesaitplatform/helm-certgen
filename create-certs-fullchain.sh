@@ -137,7 +137,7 @@ oc apply -f route-template/route.yml
 declare -a ARGS
 declare -i argcounter=0
 for var in "$@"; do
-    argcounter++
+    ((argcounter++))
 
     # Ignore host and domain arguments
     if [ "$argcounter" < 5 ]; then
