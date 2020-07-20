@@ -140,7 +140,7 @@ for var in "$@"; do
     ((argcounter++))
 
     # Ignore host and domain arguments
-    if [ "$argcounter" < 5 ]; then
+    if (( $argcounter < 5 )); then
         continue
     fi
     ARGS[${#ARGS[@]}]="$var"
