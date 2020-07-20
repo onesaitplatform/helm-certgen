@@ -38,7 +38,8 @@ parseParams() {
 
 # Load configuration file
 source $HELM_PLUGIN_DIR/config.properties
-#source config.properties
+
+echo "K8s Namespace: "$HELM_NAMESPACE
 
 if [[ ! -d  $(pwd)/ssl ]]; then
   mkdir $(pwd)/ssl
