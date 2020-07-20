@@ -143,7 +143,7 @@ echo $var
     if (( $argcounter < 5 )); then
         continue
     fi
-    ARGS[${#ARGS[@]}]="$var"
+    ARGS+=($var)
 done
 
 echo $ARGS
