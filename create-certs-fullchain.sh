@@ -147,6 +147,8 @@ for var in "$@"; do
     ARGS+=($var)
 done
 
-echo $ARGS
+for e in "${ARGS[@]}"; do
+    printf "%s\n" "$e";
+done
 
 $HELM_BIN $ARGS
