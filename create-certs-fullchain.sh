@@ -133,6 +133,20 @@ echo "$cert" >> route-template/route.yml
 # Deploys route to the Openshift cluster
 oc apply -f route-template/route.yml
 
-echo $HELM_BIN $@
+# Declare an array and delete arguments
+declare -a ARGS
+declare -1 argcounter=0
+dec
+for var in "$@"; do
+    argcounter++
 
-$HELM_BIN $@
+    # Ignore host and domain arguments
+    if [ "$argcounter" < 5 ]; then
+        continue
+    fi
+    ARGS[${#ARGS[@]}]="$var"
+done
+
+echo $ARGS
+
+$HELM_BIN $ARGS
