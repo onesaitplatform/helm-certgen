@@ -133,4 +133,6 @@ echo "$cert" >> route-template/route.yml
 # Deploys route to the Openshift cluster
 oc apply -f route-template/route.yml
 
+echo $HELM_BIN $@
+
 $HELM_BIN $@
