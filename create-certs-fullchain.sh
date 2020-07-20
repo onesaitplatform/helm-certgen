@@ -138,7 +138,7 @@ declare -a ARGS
 declare -i argcounter=0
 for var in "$@"; do
     ((argcounter++))
-
+echo $var
     # Ignore host and domain arguments
     if (( $argcounter < 5 )); then
         continue
