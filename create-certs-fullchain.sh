@@ -70,7 +70,7 @@ openssl x509 -req -extfile <(printf "subjectAltName=${DNS}$domain") -days 730 -i
 
 # Generate a certificate chain
 #===========================================================
-cat ssl/intermediate.crt ssl/ca.crt > ssl/fullchain.crt >> tracefile.out
+cat ssl/intermediate.crt ssl/ca.crt > ssl/fullchain.crt
 
 # Verify the certificate (CRT) info
 
