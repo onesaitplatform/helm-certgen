@@ -134,15 +134,16 @@ echo "$cert" >> route-template/route.yml
 oc apply -f route-template/route.yml
 
 # Declare an array and delete arguments
-declare -a ARGS
+declare -a ARGS=()
 declare -i argcounter=0
 for var in "$@"; do
     ((argcounter++))
-echo $var
+
     # Ignore host and domain arguments
-    if (( $argcounter < 5 )); then
+    if (( $argcounter -lt 5 )); then
         continue
     fi
+    echo $var
     ARGS+=($var)
 done
 
