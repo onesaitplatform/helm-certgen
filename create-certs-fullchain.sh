@@ -136,7 +136,6 @@ oc apply -f route-template/route.yml
 # Declare an array and delete arguments
 declare -a ARGS
 declare -i argcounter=0
-dec
 for var in "$@"; do
     argcounter++
 
