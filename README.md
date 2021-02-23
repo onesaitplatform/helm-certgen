@@ -1,3 +1,5 @@
+[![Artifact HUB](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/certgen)](https://artifacthub.io/packages/search?repo=certgen)
+
 ## Helm plugin for self signed certificates generation
 
 This plugin allows to generate self signed certificates, additionally generates and deploys Openshift route manifest file including complete certificate chain and private key.
